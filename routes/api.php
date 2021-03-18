@@ -14,6 +14,19 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
+Route::namespace('App\Http\Controllers\Api')->group(function(){
+
+	Route::prefix('auth')->group(function(){
+		Route::post('login', 'AuthController@login');
+		Route::post('register', 'AuthController@register');
+		Route::post('refresh-token', 'AuthController@refreshToken');
+	});
+
+	Route::group([
+		'middleware'=>'auth:api'
+	], function(){
+		Route::get('index', 'AuthController@index');
+		Route::post('logout', 'AuthController@logout');
+	});
+
 });

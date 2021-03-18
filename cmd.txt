@@ -1,0 +1,8 @@
+composer create-project laravel/laravel OAuthWebApp
+npm install
+npm run dev
+php artisan migrate
+php artisan serve
+composer require laravel/passport
+php artisan migrate
+php artisan passport:install
